@@ -3,15 +3,15 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\IngredientRepository;
+use App\Repository\ToolRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: IngredientRepository::class)]
+#[ORM\Entity(repositoryClass: ToolRepository::class)]
 #[ApiResource]
-class Ingredient
+class Tool
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,13 +24,10 @@ class Ingredient
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?int $price = null;
-
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\ManyToMany(targetEntity: Potion::class, mappedBy: 'ingredients')]
+    #[ORM\ManyToMany(targetEntity: Potion::class, mappedBy: 'tools')]
     private Collection $potions;
 
     public function __construct()
@@ -67,18 +64,6 @@ class Ingredient
         return $this;
     }
 
-    public function getPrice(): ?int
-    {
-        return $this->price;
-    }
-
-    public function setPrice(int $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
     public function getImage(): ?string
     {
         return $this->image;
@@ -103,7 +88,7 @@ class Ingredient
     {
         if (!$this->potions->contains($potion)) {
             $this->potions->add($potion);
-            $potion->addIngredient($this);
+            $potion->addTool($this);
         }
 
         return $this;
@@ -112,7 +97,7 @@ class Ingredient
     public function removePotion(Potion $potion): self
     {
         if ($this->potions->removeElement($potion)) {
-            $potion->removeIngredient($this);
+            $potion->removeTool($this);
         }
 
         return $this;
