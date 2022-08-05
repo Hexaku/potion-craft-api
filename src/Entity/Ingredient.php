@@ -30,12 +30,12 @@ class Ingredient
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\ManyToMany(targetEntity: Potion::class, mappedBy: 'ingredients')]
-    private Collection $potions;
+    #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: Recipe::class)]
+    private Collection $recipes;
 
     public function __construct()
     {
-        $this->potions = new ArrayCollection();
+        $this->recipes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,27 +92,30 @@ class Ingredient
     }
 
     /**
-     * @return Collection<int, Potion>
+     * @return Collection<int, Recipe>
      */
-    public function getPotions(): Collection
+    public function getRecipes(): Collection
     {
-        return $this->potions;
+        return $this->recipes;
     }
 
-    public function addPotion(Potion $potion): self
+    public function addRecipe(Recipe $recipe): self
     {
-        if (!$this->potions->contains($potion)) {
-            $this->potions->add($potion);
-            $potion->addIngredient($this);
+        if (!$this->recipes->contains($recipe)) {
+            $this->recipes->add($recipe);
+            $recipe->setIngredient($this);
         }
 
         return $this;
     }
 
-    public function removePotion(Potion $potion): self
+    public function removeRecipe(Recipe $recipe): self
     {
-        if ($this->potions->removeElement($potion)) {
-            $potion->removeIngredient($this);
+        if ($this->recipes->removeElement($recipe)) {
+            // set the owning side to null (unless already changed)
+            if ($recipe->getIngredient() === $this) {
+                $recipe->setIngredient(null);
+            }
         }
 
         return $this;

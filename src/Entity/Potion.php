@@ -23,19 +23,19 @@ class Potion
     #[ORM\Column]
     private ?int $level = null;
 
+    #[ORM\OneToMany(mappedBy: 'potion', targetEntity: Recipe::class)]
+    private Collection $recipes;
+
     #[ORM\ManyToOne(inversedBy: 'potions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Effect $effect = null;
 
-    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'potions')]
-    private Collection $ingredients;
-
-    #[ORM\ManyToMany(targetEntity: Tool::class, inversedBy: 'potions')]
+    #[ORM\ManyToMany(targetEntity: Tool::class, mappedBy: 'potions')]
     private Collection $tools;
 
     public function __construct()
     {
-        $this->ingredients = new ArrayCollection();
+        $this->recipes = new ArrayCollection();
         $this->tools = new ArrayCollection();
     }
 
@@ -68,6 +68,36 @@ class Potion
         return $this;
     }
 
+    /**
+     * @return Collection<int, Recipe>
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->recipes;
+    }
+
+    public function addRecipe(Recipe $recipe): self
+    {
+        if (!$this->recipes->contains($recipe)) {
+            $this->recipes->add($recipe);
+            $recipe->setPotion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipe(Recipe $recipe): self
+    {
+        if ($this->recipes->removeElement($recipe)) {
+            // set the owning side to null (unless already changed)
+            if ($recipe->getPotion() === $this) {
+                $recipe->setPotion(null);
+            }
+        }
+
+        return $this;
+    }
+
     public function getEffect(): ?Effect
     {
         return $this->effect;
@@ -76,30 +106,6 @@ class Potion
     public function setEffect(?Effect $effect): self
     {
         $this->effect = $effect;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Ingredient>
-     */
-    public function getIngredients(): Collection
-    {
-        return $this->ingredients;
-    }
-
-    public function addIngredient(Ingredient $ingredient): self
-    {
-        if (!$this->ingredients->contains($ingredient)) {
-            $this->ingredients->add($ingredient);
-        }
-
-        return $this;
-    }
-
-    public function removeIngredient(Ingredient $ingredient): self
-    {
-        $this->ingredients->removeElement($ingredient);
 
         return $this;
     }
@@ -116,6 +122,7 @@ class Potion
     {
         if (!$this->tools->contains($tool)) {
             $this->tools->add($tool);
+            $tool->addPotion($this);
         }
 
         return $this;
@@ -123,7 +130,9 @@ class Potion
 
     public function removeTool(Tool $tool): self
     {
-        $this->tools->removeElement($tool);
+        if ($this->tools->removeElement($tool)) {
+            $tool->removePotion($this);
+        }
 
         return $this;
     }

@@ -27,7 +27,7 @@ class Tool
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\ManyToMany(targetEntity: Potion::class, mappedBy: 'tools')]
+    #[ORM\ManyToMany(targetEntity: Potion::class, inversedBy: 'tools')]
     private Collection $potions;
 
     public function __construct()
@@ -88,7 +88,6 @@ class Tool
     {
         if (!$this->potions->contains($potion)) {
             $this->potions->add($potion);
-            $potion->addTool($this);
         }
 
         return $this;
@@ -96,9 +95,7 @@ class Tool
 
     public function removePotion(Potion $potion): self
     {
-        if ($this->potions->removeElement($potion)) {
-            $potion->removeTool($this);
-        }
+        $this->potions->removeElement($potion);
 
         return $this;
     }
