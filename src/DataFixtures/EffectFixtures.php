@@ -58,10 +58,6 @@ class EffectFixtures extends Fixture
             'image' => 'Levitation.png'
         ],
         [
-            'name' => 'Levitation',
-            'image' => 'Levitation.png'
-        ],
-        [
             'name' => 'Libido',
             'image' => 'Libido.png'
         ],
@@ -113,6 +109,7 @@ class EffectFixtures extends Fixture
             $newEffect = (new Effect())
                 ->setName($effect['name'])
                 ->setImage($effect['image']);
+
             $manager->persist($newEffect);
         }
 
