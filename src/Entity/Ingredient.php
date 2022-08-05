@@ -30,8 +30,8 @@ class Ingredient
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: Recipe::class)]
-    private Collection $recipes;
+    #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: PotionIngredient::class)]
+    private Collection $potionIngredients;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: false)]
@@ -39,7 +39,7 @@ class Ingredient
 
     public function __construct()
     {
-        $this->recipes = new ArrayCollection();
+        $this->potionIngredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,29 +96,29 @@ class Ingredient
     }
 
     /**
-     * @return Collection<int, Recipe>
+     * @return Collection<int, PotionIngredient>
      */
-    public function getRecipes(): Collection
+    public function getPotionIngredients(): Collection
     {
-        return $this->recipes;
+        return $this->potionIngredients;
     }
 
-    public function addRecipe(Recipe $recipe): self
+    public function addPotionIngredient(PotionIngredient $potionIngredient): self
     {
-        if (!$this->recipes->contains($recipe)) {
-            $this->recipes->add($recipe);
-            $recipe->setIngredient($this);
+        if (!$this->potionIngredients->contains($potionIngredient)) {
+            $this->potionIngredients->add($potionIngredient);
+            $potionIngredient->setIngredient($this);
         }
 
         return $this;
     }
 
-    public function removeRecipe(Recipe $recipe): self
+    public function removePotionIngredient(PotionIngredient $potionIngredient): self
     {
-        if ($this->recipes->removeElement($recipe)) {
+        if ($this->potionIngredients->removeElement($potionIngredient)) {
             // set the owning side to null (unless already changed)
-            if ($recipe->getIngredient() === $this) {
-                $recipe->setIngredient(null);
+            if ($potionIngredient->getIngredient() === $this) {
+                $potionIngredient->setIngredient(null);
             }
         }
 

@@ -3,26 +3,26 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Repository\RecipeRepository;
+use App\Repository\PotionIngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RecipeRepository::class)]
+#[ORM\Entity(repositoryClass: PotionIngredientRepository::class)]
 #[ApiResource]
-class Recipe
+class PotionIngredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\ManyToOne(inversedBy: 'potionIngredients')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Ingredient $ingredient = null;
 
     #[ORM\Column]
     private ?int $ingredientQuantity = null;
 
-    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\ManyToOne(inversedBy: 'potionIngredients')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Potion $potion = null;
 

@@ -40,6 +40,8 @@ class ToolFixtures extends Fixture
                 ->setImage($tool['image']);
 
             $manager->persist($newTool);
+
+            $this->addReference('tool_' . strtolower($tool['name']), $newTool);
         }
 
         $manager->flush();

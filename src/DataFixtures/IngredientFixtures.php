@@ -174,9 +174,10 @@ class IngredientFixtures extends Fixture implements DependentFixtureInterface
             'price' => 40,
             'ingredient_type' => 'mushroom'
         ],
+        // Minerals
         [
             'name' => 'Cloud Crystal',
-            'description' => 'Cloudy like a cloud, crystal like... crystal.',
+            'description' => 'Cloudy like a cloud, crystal like... crystal',
             'image' => 'Cloud_Crystal.png',
             'price' => 240,
             'ingredient_type' => 'mineral'

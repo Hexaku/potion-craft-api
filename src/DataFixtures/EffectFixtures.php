@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Effect;
+use App\Service\Slugifier;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -103,6 +104,9 @@ class EffectFixtures extends Fixture
         ]
     ];
 
+    public function __construct(private Slugifier $slugifier)
+    {}
+
     public function load(ObjectManager $manager): void
     {
         foreach(self::EFFECTS as $effect){
@@ -111,6 +115,8 @@ class EffectFixtures extends Fixture
                 ->setImage($effect['image']);
 
             $manager->persist($newEffect);
+            $slug = $this->slugifier->slugify($effect['name']);
+            $this->addReference('effect_' . $slug, $newEffect);
         }
 
         $manager->flush();
