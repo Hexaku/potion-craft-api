@@ -4,7 +4,7 @@ namespace App\Service;
 
 class Slugifier
 {
-    public function slugify(string $string): string
+    public function slugify(string $string, string $replaceChar = '-'): string
     {
         // Handmade slugifier but should resolve most cases
         $string = mb_strtolower($string);
@@ -15,7 +15,7 @@ class Slugifier
         $string = str_replace(['ö', 'ò'], 'o', $string);
         $string = str_replace(['ü'], 'u', $string);
         $string = str_replace('ç', 'c', $string);
-        $string = preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+        $string = preg_replace('/[^A-Za-z0-9-]+/', $replaceChar, $string);
 
         return $string;
     }

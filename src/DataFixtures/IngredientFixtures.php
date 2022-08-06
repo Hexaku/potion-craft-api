@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ingredient;
-use App\Entity\IngredientType;
+use App\Service\Slugifier;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -212,6 +212,9 @@ class IngredientFixtures extends Fixture implements DependentFixtureInterface
         ]
     ];
 
+    public function __construct(private Slugifier $slugifier)
+    {}
+
     public function load(ObjectManager $manager): void
     {
         foreach(self::INGREDIENTS as $ingredient){
@@ -223,6 +226,7 @@ class IngredientFixtures extends Fixture implements DependentFixtureInterface
                 ->setIngredientType($this->getReference("ingredient_type_" . $ingredient['ingredient_type']));
             
             $manager->persist($newIngredient);
+            $this->addReference('ingredient_' . $this->slugifier->slugify($ingredient['name'], '_'), $newIngredient);
         }
 
         $manager->flush();

@@ -21,7 +21,7 @@ class Potion
     private ?string $name = null;
 
     #[ORM\Column]
-    private ?int $level = null;
+    private ?string $level = null;
 
     #[ORM\OneToMany(mappedBy: 'potion', targetEntity: PotionIngredient::class)]
     private Collection $potionIngredients;
@@ -56,12 +56,12 @@ class Potion
         return $this;
     }
 
-    public function getLevel(): ?int
+    public function getLevel(): ?string
     {
         return $this->level;
     }
 
-    public function setLevel(int $level): self
+    public function setLevel(string $level): self
     {
         $this->level = $level;
 
