@@ -33,6 +33,9 @@ class Potion
     #[ORM\ManyToMany(targetEntity: Tool::class, mappedBy: 'potions')]
     private Collection $tools;
 
+    #[ORM\Column]
+    private ?int $price = null;
+
     public function __construct()
     {
         $this->potionIngredients = new ArrayCollection();
@@ -133,6 +136,18 @@ class Potion
         if ($this->tools->removeElement($tool)) {
             $tool->removePotion($this);
         }
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

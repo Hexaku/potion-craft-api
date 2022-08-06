@@ -45,7 +45,54 @@ class PotionIngredientFixtures extends Fixture implements DependentFixtureInterf
             'ingredient' => 'terraria',
             'ingredient_quantity' => 6,
             'potion' => 'strong_acid'
-        ]
+        ],
+        // Berserker potions
+        [
+            'ingredient' => 'firebell',
+            'ingredient_quantity' => 5,
+            'potion' => 'strong_berserker'
+        ],
+        [
+            'ingredient' => 'windbloom',
+            'ingredient_quantity' => 3,
+            'potion' => 'strong_berserker'
+        ],
+        // Bounce potions
+        [
+            'ingredient' => 'windbloom',
+            'ingredient_quantity' => 4,
+            'potion' => 'weak_bounce'
+        ],
+        [
+            'ingredient' => 'waterbloom',
+            'ingredient_quantity' => 2,
+            'potion' => 'weak_bounce'
+        ],
+        [
+            'ingredient' => 'windbloom',
+            'ingredient_quantity' => 4,
+            'potion' => 'medium_bounce'
+        ],
+        [
+            'ingredient' => 'waterbloom',
+            'ingredient_quantity' => 2,
+            'potion' => 'medium_bounce'
+        ],
+        [
+            'ingredient' => 'waterbloom',
+            'ingredient_quantity' => 2,
+            'potion' => 'strong_bounce'
+        ],
+        [
+            'ingredient' => 'windbloom',
+            'ingredient_quantity' => 4,
+            'potion' => 'strong_bounce'
+        ],
+        [
+            'ingredient' => 'firebell',
+            'ingredient_quantity' => 1,
+            'potion' => 'strong_bounce'
+        ],
     ];
 
     public function load(ObjectManager $manager): void
