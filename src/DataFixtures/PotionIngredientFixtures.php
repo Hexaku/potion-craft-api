@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\PotionIngredient;
+use App\Service\Slugifier;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -45,65 +46,27 @@ class PotionIngredientFixtures extends Fixture implements DependentFixtureInterf
             'ingredient' => 'terraria',
             'ingredient_quantity' => 6,
             'potion' => 'strong_acid'
-        ],
-        // Berserker potions
-        [
-            'ingredient' => 'firebell',
-            'ingredient_quantity' => 5,
-            'potion' => 'strong_berserker'
-        ],
-        [
-            'ingredient' => 'windbloom',
-            'ingredient_quantity' => 3,
-            'potion' => 'strong_berserker'
-        ],
-        // Bounce potions
-        [
-            'ingredient' => 'windbloom',
-            'ingredient_quantity' => 4,
-            'potion' => 'weak_bounce'
-        ],
-        [
-            'ingredient' => 'waterbloom',
-            'ingredient_quantity' => 2,
-            'potion' => 'weak_bounce'
-        ],
-        [
-            'ingredient' => 'windbloom',
-            'ingredient_quantity' => 4,
-            'potion' => 'medium_bounce'
-        ],
-        [
-            'ingredient' => 'waterbloom',
-            'ingredient_quantity' => 2,
-            'potion' => 'medium_bounce'
-        ],
-        [
-            'ingredient' => 'waterbloom',
-            'ingredient_quantity' => 2,
-            'potion' => 'strong_bounce'
-        ],
-        [
-            'ingredient' => 'windbloom',
-            'ingredient_quantity' => 4,
-            'potion' => 'strong_bounce'
-        ],
-        [
-            'ingredient' => 'firebell',
-            'ingredient_quantity' => 1,
-            'potion' => 'strong_bounce'
-        ],
+        ]
     ];
+
+    public function __construct(private Slugifier $slugifier)
+    {}
 
     public function load(ObjectManager $manager): void
     {
-        foreach(self::POTION_INGREDIENTS as $potionIngredient){
-            $newPotionIngredient = (new PotionIngredient())
-                ->setIngredient($this->getReference('ingredient_' . $potionIngredient['ingredient']))
-                ->setIngredientQuantity($potionIngredient['ingredient_quantity'])
-                ->setPotion($this->getReference('potion_' . $potionIngredient['potion']));
-
-            $manager->persist($newPotionIngredient);
+        // For each potion, add 3 to 5 random ingredients with random quantities
+        for($i=1; $i<=PotionFixtures::TOTAL_POTIONS; $i++){
+            $randomPotionIngredients = rand(3,5);
+            for($j=0; $j<$randomPotionIngredients; $j++){
+                $randomIngredientId = rand(0, count(IngredientFixtures::INGREDIENTS)-1);
+                $randomQuantity = rand(1, 5);
+                $newPotionIngredient = (new PotionIngredient())
+                    ->setPotion($this->getReference('potion_' . $i))
+                    ->setIngredient($this->getReference('ingredient_' . $this->slugifier->slugify(IngredientFixtures::INGREDIENTS[$randomIngredientId]['name'], '_')))
+                    ->setIngredientQuantity($randomQuantity);
+    
+                $manager->persist($newPotionIngredient);
+            }
         }
 
         $manager->flush();

@@ -115,7 +115,7 @@ class EffectFixtures extends Fixture
                 ->setImage($effect['image']);
 
             $manager->persist($newEffect);
-            $slug = $this->slugifier->slugify($effect['name']);
+            $slug = $this->slugifier->slugify($effect['name'], '_');
             $this->addReference('effect_' . $slug, $newEffect);
         }
 
