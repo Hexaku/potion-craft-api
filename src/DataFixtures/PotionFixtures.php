@@ -25,13 +25,21 @@ class PotionFixtures extends Fixture implements DependentFixtureInterface
             foreach(self::POTION_LEVELS as $level){
                 $slugEffect = $this->slugifier->slugify($effect['name'], '_');
                 $newPotion = (new Potion())
-                ->setLevel($level)
-                ->setEffect($this->getReference('effect_' . $slugEffect));
+                    ->setLevel($level)
+                    ->setEffect($this->getReference('effect_' . $slugEffect))
+                    ->addTool($this->getReference('tool_cauldron'));
 
-                foreach(ToolFixtures::TOOLS as $tool){
-                    $newPotion->addTool($this->getReference('tool_' . strtolower($tool['name'])));
+                // Add 1 tool for medium potion and 2 tools for strong potions
+                switch($newPotion->getLevel()){
+                    case 'medium':
+                        $newPotion->addTool($this->getReference('tool_mortar'));
+                        break;
+                    case 'strong':
+                        $newPotion->addTool($this->getReference('tool_mortar'));
+                        $newPotion->addTool($this->getReference('tool_ladle'));
+                        break;
                 }
-
+                
                 // Potion name like : Weak Potion of Fire
                 $newPotion->setName(ucfirst($newPotion->getLevel()) . ' Potion of ' . $newPotion->getEffect()->getName());
 
@@ -39,7 +47,6 @@ class PotionFixtures extends Fixture implements DependentFixtureInterface
                 $this->addReference('potion_' . $incr, $newPotion);
                 $incr++;
             }
-        
         }
         
         $manager->flush();
