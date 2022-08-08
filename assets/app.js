@@ -1,3 +1,5 @@
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -10,3 +12,11 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+
+const App = () => {
+    return <h1>Hello boys !!!!</h1>
+}
+
+const container = document.querySelector('#app');
+const root = createRoot(container);
+root.render(<App />);
