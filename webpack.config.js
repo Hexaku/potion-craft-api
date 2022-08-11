@@ -56,7 +56,7 @@ Encore
         config.corejs = 3;
     })
 
-
+    .enablePostCssLoader()
 
     // enables Sass/SCSS support
     //.enableSassLoader()
@@ -66,7 +66,6 @@ Encore
 
     // uncomment if you use React
     .enableReactPreset()
-    .enablePostCssLoader()
 
     // uncomment to get integrity="..." attributes on your script & link tags
     // requires WebpackEncoreBundle 1.4 or higher
