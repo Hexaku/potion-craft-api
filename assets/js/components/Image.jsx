@@ -6,7 +6,6 @@ const Image = ({ fileName, alt, className, ...rest }) => {
 
     if (error) return <p>{alt}</p>;
 
-
     return (
         <>
             {loading ? (
