@@ -8,9 +8,16 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['get:collection']]
+        ]
+    ]
+)]
 class Ingredient
 {
     #[ORM\Id]
@@ -19,22 +26,28 @@ class Ingredient
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get:collection'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['get:collection'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['get:collection'])]
     private ?int $price = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get:collection'])]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: PotionIngredient::class)]
+    #[Groups(['get:collection'])]
     private Collection $potionIngredients;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get:collection'])]
     private ?IngredientType $ingredientType = null;
 
     public function __construct()
