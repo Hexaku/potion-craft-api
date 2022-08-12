@@ -1,5 +1,6 @@
 import React from 'react';
 import useImage from "../hooks/useImage";
+import loader from '../../images/loader.gif';
 
 const Image = ({ fileName, alt, className, ...rest }) => {
     const { loading, error, image } = useImage(fileName)
@@ -9,7 +10,7 @@ const Image = ({ fileName, alt, className, ...rest }) => {
     return (
         <>
             {loading ? (
-                <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif"></img>
+                <img width="192" height="192" src={loader}></img>
             ) : (
                 <img
                     className={`Image${
