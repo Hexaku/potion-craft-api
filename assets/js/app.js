@@ -1,16 +1,21 @@
 import React, {Fragment} from 'react';
 import { createRoot } from 'react-dom/client';
-
-// any CSS you import will output into a single css file (app.css in this case)
-import '../css/app.css';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
+import IngredientsPage from './pages/IngredientsPage';
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+import '../css/app.css';
+
 
 const App = () => {
     return (
-      <Fragment>
-        <Navbar />
-      </Fragment>
+      <Router>
+        <Navbar/>
+        <Routes>
+          <Route path='/ingredients' element={<IngredientsPage />} />
+          <Route path='/' element={<HomePage/>} />
+        </Routes>
+      </Router>
     )
 }
 
@@ -19,7 +24,6 @@ const root = createRoot(container);
 root.render(
 <Fragment>
   <App/>
-  <HomePage/>
 </Fragment>
 );
 
