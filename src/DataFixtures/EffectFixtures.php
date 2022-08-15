@@ -13,7 +13,7 @@ class EffectFixtures extends Fixture
         [
             'name' => 'Acid',
             'image' => 'Acid.png',
-            'description' => 'Life can be simple when you can melt everything'
+            'description' => 'Life is always simpler when you can melt everything'
         ],
         [
             'name' => 'Berserker',
