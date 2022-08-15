@@ -1,6 +1,8 @@
 import React from 'react';
+import Tippy from '@tippyjs/react';
 import Image from '../Image';
 import coinImage from '../../../images/coin.png';
+import potionImage from '../../../images/potion.png';
 
 const IngredientCard = ({ingredient}) => {
 
@@ -18,9 +20,21 @@ const IngredientCard = ({ingredient}) => {
                     {ingredient.description}
                     </p>
                 </div>
-                <div className="flex items-center flex-row inset-x-0 bottom-0 p-6">
+                <div className="flex items-center flex-row inset-x-0 bottom-0 px-6 pt-6">
                     <img className="w-8 h-8 rounded-full mr-1" src={coinImage}/>
                     <p className="text-gray-600 font-bold text-xs md:text-sm">{ingredient.price} golds</p>
+                </div>
+                <div className="flex items-center flex-row inset-x-0 bottom-0 p-6">
+                    <p className="text-gray-600 font-bold text-xs md:text-sm">Used in : </p>
+                    <Tippy content="test" className="p-2 bg-gray-400 rounded text-white">
+                        <img className="w-8 h-8 rounded-full ml-3" src={potionImage} alt="Avatar of Author"/>
+                    </Tippy>
+                    <Tippy content="test" className="p-2 bg-gray-400 rounded text-white">
+                        <img className="w-8 h-8 rounded-full ml-3" src={potionImage} alt="Avatar of Author"/>
+                    </Tippy>
+                    <Tippy content="test" className="p-2 bg-gray-400 rounded text-white">
+                        <img className="w-8 h-8 rounded-full ml-3" src={potionImage} alt="Avatar of Author"/>
+                    </Tippy>
                 </div>
                 </a>
             </div>

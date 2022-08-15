@@ -1,10 +1,10 @@
 import React from 'react';
-import EffectsList from '../components/Effect/EffectList';
+import EffectList from '../components/Effect/EffectList';
 
 const EffectsPage = () => {
     return ( 
         <>
-            <EffectsList />
+            <EffectList />
         </>
     );
 }

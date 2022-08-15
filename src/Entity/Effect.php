@@ -22,6 +22,7 @@ class Effect
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_effects_collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
