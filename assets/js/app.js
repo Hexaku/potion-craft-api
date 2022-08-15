@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import IngredientsPage from './pages/IngredientsPage';
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import '../css/app.css';
+import EffectsPage from './pages/EffectsPage';
 
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Navbar/>
         <Routes>
           <Route path='/ingredients' element={<IngredientsPage />} />
+          <Route path='/effects' element={<EffectsPage />} />
           <Route path='/' element={<HomePage/>} />
         </Routes>
       </Router>

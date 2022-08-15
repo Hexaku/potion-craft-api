@@ -1,11 +1,10 @@
 import React from 'react';
 import IngredientList from '../components/Ingredient/IngredientList';
 
-const IngredientsPage = props => {
-
+const IngredientsPage = () => {
     return (
         <>
-        <IngredientList />
+            <IngredientList />
         </>
     );
 }
