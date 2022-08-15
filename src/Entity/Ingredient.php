@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     collectionOperations: [
         'get' => [
-            'normalization_context' => ['groups' => ['get:collection']]
+            'normalization_context' => ['groups' => ['get_ingredients_collection']]
         ]
     ]
 )]
@@ -26,28 +26,28 @@ class Ingredient
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get:collection'])]
+    #[Groups(['get_ingredients_collection'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['get:collection'])]
+    #[Groups(['get_ingredients_collection'])]
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Groups(['get:collection'])]
+    #[Groups(['get_ingredients_collection'])]
     private ?int $price = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get:collection'])]
+    #[Groups(['get_ingredients_collection'])]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: PotionIngredient::class)]
-    #[Groups(['get:collection'])]
+    #[Groups(['get_ingredients_collection'])]
     private Collection $potionIngredients;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get:collection'])]
+    #[Groups(['get_ingredients_collection'])]
     private ?IngredientType $ingredientType = null;
 
     public function __construct()

@@ -7,6 +7,7 @@ use App\Repository\PotionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PotionRepository::class)]
 #[ApiResource]
@@ -18,6 +19,7 @@ class Potion
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_effects_collection'])]
     private ?string $name = null;
 
     #[ORM\Column]

@@ -11,9 +11,9 @@ const IngredientCard = ({ingredient}) => {
                 <div className="flex justify-center">
                     <Image fileName={"ingredients/" + ingredient.image} className="h-48 w-auto rounded-t"/>
                 </div>
-                <div className="p-6 h-auto md:h-48">
+                <div className="p-6 h-auto md:h-40">
                     <p className="text-gray-600 text-xs md:text-sm">{ingredient.ingredientType.name}</p>
-                    <div className="font-bold text-xl text-gray-900">{ingredient.name}</div>
+                    <div className="font-bold text-xl text-gray-900 mb-2">{ingredient.name}</div>
                     <p className="text-gray-800 font-serif text-base mb-5">
                     {ingredient.description}
                     </p>
