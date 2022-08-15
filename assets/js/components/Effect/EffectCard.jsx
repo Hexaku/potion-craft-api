@@ -1,4 +1,5 @@
 import React from 'react';
+import Tippy from '@tippyjs/react';
 import Image from '../Image';
 
 const EffectCard = ({effect}) => {
@@ -15,9 +16,15 @@ const EffectCard = ({effect}) => {
                 </div>
                 <div className="flex items-center flex-row inset-x-0 bottom-0 p-6">
                     <p className="text-gray-600 font-bold text-xs md:text-sm">Result of : </p>
-                    <img className="w-8 h-8 rounded-full mr-1 avatar" data-tippy-content="Admin" src="http://i.pravatar.cc/300" alt="Avatar of Author"/>
-                    <img className="w-8 h-8 rounded-full mr-1" src=""/>
-                    <img className="w-8 h-8 rounded-full mr-1" src=""/>
+                    <Tippy content="Small Potion of Acid" className="p-2 bg-gray-400 rounded text-white">
+                        <img className="w-8 h-8 rounded-full mr-1" src="http://i.pravatar.cc/300" alt="Avatar of Author"/>
+                    </Tippy>
+                    <Tippy content="Medium Potion of Acid" className="p-2 bg-gray-400 rounded text-white">
+                        <img className="w-8 h-8 rounded-full mr-1" src="http://i.pravatar.cc/300" alt="Avatar of Author"/>
+                    </Tippy>                    
+                    <Tippy content="Strong Potion of Acid" className="p-2 bg-gray-400 rounded text-white">
+                        <img className="w-8 h-8 rounded-full mr-1" src="http://i.pravatar.cc/300" alt="Avatar of Author"/>
+                    </Tippy>
                 </div>
                 </a>
             </div>
