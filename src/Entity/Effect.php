@@ -26,6 +26,9 @@ class Effect
     #[ORM\OneToMany(mappedBy: 'effect', targetEntity: Potion::class)]
     private Collection $potions;
 
+    #[ORM\Column(length: 255)]
+    private ?string $description = null;
+
     public function __construct()
     {
         $this->potions = new ArrayCollection();
@@ -86,6 +89,18 @@ class Effect
                 $potion->setEffect(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

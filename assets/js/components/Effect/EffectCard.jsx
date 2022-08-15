@@ -13,6 +13,9 @@ const EffectCard = ({effect}) => {
                 </div>
                 <div className="p-6 h-auto md:h-48">
                     <div className="font-bold text-xl text-gray-900">{effect.name}</div>
+                    <p className="text-gray-800 font-serif text-base mb-5">
+                    {effect.description}
+                    </p>
                 </div>
                 <div className="flex items-center flex-row inset-x-0 bottom-0 p-6">
                     <p className="text-gray-600 font-bold text-xs md:text-sm">Result of : </p>

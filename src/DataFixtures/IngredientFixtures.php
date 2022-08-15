@@ -21,7 +21,7 @@ class IngredientFixtures extends Fixture implements DependentFixtureInterface
         ],
         [
             'name' => 'Firebell',
-            'description' => 'Slightly hot to the touch.',
+            'description' => 'Slightly hot to the touch',
             'image' => 'Firebell.png',
             'price' => 20,
             'ingredient_type' => 'herb'
