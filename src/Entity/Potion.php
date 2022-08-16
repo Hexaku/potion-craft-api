@@ -15,7 +15,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'get' => [
             'normalization_context' => ['groups' => ['get_potions_collection']]
         ]
-    ]
+    ],
+    attributes: ["pagination_enabled" => false]
 )]
 class Potion
 {
@@ -45,6 +46,10 @@ class Potion
     #[ORM\ManyToMany(targetEntity: Tool::class, mappedBy: 'potions')]
     #[Groups(['get_potions_collection'])]
     private Collection $tools;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['get_potions_collection'])]
+    private ?string $image = null;
 
     public function __construct()
     {
@@ -146,6 +151,18 @@ class Potion
         if ($this->tools->removeElement($tool)) {
             $tool->removePotion($this);
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

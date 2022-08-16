@@ -1,15 +1,13 @@
 import React from 'react';
-import potionImage from '../../../images/potions/potion_bounce.jpg';
-
+import Image from '../Image';
 
 const PotionCard = ({potion}) => {
-
     return (
         <div className="w-full md:w-1/3 px-2 pb-12">
             <div className="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
                 <a href="#" className="no-underline hover:no-underline">
                 <div className="flex justify-center">
-                    <img src={potionImage} className="h-40 w-auto rounded-full" />
+                    <Image fileName={"potions/" + potion.image} className="h-40 w-auto rounded-full"/>
                 </div>
                 <div className="p-6 h-auto md:h-40">
                     <div className="flex align-items font-bold text-xl text-gray-900 mb-2">{potion.name}</div>
