@@ -10,29 +10,40 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PotionRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['get_potions_collection']]
+        ]
+    ]
+)]
 class Potion
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_potions_collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_effects_collection'])]
+    #[Groups(['get_effects_collection', 'get_potions_collection'])]
     private ?string $name = null;
 
     #[ORM\Column]
+    #[Groups(['get_potions_collection'])]
     private ?string $level = null;
 
     #[ORM\OneToMany(mappedBy: 'potion', targetEntity: PotionIngredient::class)]
+    #[Groups(['get_potions_collection'])]
     private Collection $potionIngredients;
 
     #[ORM\ManyToOne(inversedBy: 'potions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_potions_collection'])]
     private ?Effect $effect = null;
 
     #[ORM\ManyToMany(targetEntity: Tool::class, mappedBy: 'potions')]
+    #[Groups(['get_potions_collection'])]
     private Collection $tools;
 
     public function __construct()

@@ -22,15 +22,15 @@ class Effect
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_effects_collection'])]
+    #[Groups(['get_effects_collection', 'get_potions_collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_effects_collection'])]
+    #[Groups(['get_effects_collection', 'get_potions_collection'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_effects_collection'])]
+    #[Groups(['get_effects_collection', 'get_potions_collection'])]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'effect', targetEntity: Potion::class)]

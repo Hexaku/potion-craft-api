@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import IngredientsPage from './pages/IngredientsPage';
+import PotionsPage from './pages/PotionsPage';
 import EffectsPage from './pages/EffectsPage';
 import ToolsPage from './pages/ToolsPage';
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
@@ -16,6 +17,7 @@ const App = () => {
         <Navbar/>
         <Routes>
           <Route path='/ingredients' element={<IngredientsPage />} />
+          <Route path='/potions' element={<PotionsPage />} />
           <Route path='/effects' element={<EffectsPage />} />
           <Route path='/tools' element={<ToolsPage />} />
           <Route path='/' element={<HomePage/>} />
