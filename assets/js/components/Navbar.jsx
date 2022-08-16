@@ -10,7 +10,7 @@ const Navbar = () => {
             <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
                 <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
                     <NavLink to="/" className="font-noticia-text self-center text-xl font-semibold whitespace-nowrap dark:text-white flex items-center">
-                        <img src={potionImage} class="rounded-3xl mr-3 h-6 sm:h-9" alt="Potion Logo" />
+                        <img src={potionImage} className="rounded-3xl mr-3 h-6 sm:h-9" alt="Potion Logo" />
                         Potion Craft API
                     </NavLink>
                     <div className="flex items-center lg:order-2">
