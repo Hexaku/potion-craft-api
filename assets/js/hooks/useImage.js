@@ -20,7 +20,6 @@ const useImage = (fileName) => {
         fetchImage()
     }, [fileName])
 
-
     return {
         loading,
         error,
