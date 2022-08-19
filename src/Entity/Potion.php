@@ -27,7 +27,7 @@ class Potion
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_effects_collection', 'get_potions_collection'])]
+    #[Groups(['get_effects_collection', 'get_potions_collection', 'get_ingredient_item'])]
     private ?string $name = null;
 
     #[ORM\Column]
@@ -48,7 +48,7 @@ class Potion
     private Collection $tools;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_potions_collection'])]
+    #[Groups(['get_potions_collection', 'get_ingredient_item'])]
     private ?string $image = null;
 
     public function __construct()

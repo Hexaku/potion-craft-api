@@ -1,14 +1,16 @@
 import React from 'react';
 import Tippy from '@tippyjs/react';
+import { Link } from "react-router-dom";
 import Image from '../Image';
 import coinImage from '../../../images/coin.png';
 import potionImage from '../../../images/potion.png';
 
 const IngredientCard = ({ingredient}) => {
+    console.log(ingredient.id);
     return (    
         <div className="w-full md:w-1/3 px-2 pb-12">
             <div className="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
-                <a href="#" className="no-underline hover:no-underline">
+                <Link to={'' + ingredient.id}>
                 <div className="flex justify-center">
                     <Image fileName={"ingredients/" + ingredient.image} className="h-48 w-auto rounded-t"/>
                 </div>
@@ -35,7 +37,7 @@ const IngredientCard = ({ingredient}) => {
                         <img className="w-8 h-8 rounded-full ml-3" src={potionImage} alt="Avatar of Author"/>
                     </Tippy>
                 </div>
-                </a>
+                </Link>
             </div>
         </div>  
     );

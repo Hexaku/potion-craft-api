@@ -5,6 +5,7 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\PotionIngredientRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PotionIngredientRepository::class)]
 #[ApiResource]
@@ -20,10 +21,12 @@ class PotionIngredient
     private ?Ingredient $ingredient = null;
 
     #[ORM\Column]
+    #[Groups('get_ingredient_item')]
     private ?int $ingredientQuantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'potionIngredients')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups('get_ingredient_item')]
     private ?Potion $potion = null;
 
     public function getId(): ?int
