@@ -16,39 +16,45 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'get' => [
             'normalization_context' => ['groups' => ['get_ingredients_collection']]
         ]
-    ]
+    ],
+    itemOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['get_ingredient_item']]
+        ]
+    ],
+
 )]
 class Ingredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private ?int $price = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: PotionIngredient::class)]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private Collection $potionIngredients;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private ?IngredientType $ingredientType = null;
 
     public function __construct()

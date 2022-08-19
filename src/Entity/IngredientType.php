@@ -19,7 +19,7 @@ class IngredientType
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_ingredients_collection'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'ingredientType', targetEntity: Ingredient::class)]
