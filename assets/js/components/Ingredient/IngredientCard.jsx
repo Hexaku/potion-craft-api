@@ -5,7 +5,6 @@ import coinImage from '../../../images/coin.png';
 import potionImage from '../../../images/potion.png';
 
 const IngredientCard = ({ingredient}) => {
-
     return (    
         <div className="w-full md:w-1/3 px-2 pb-12">
             <div className="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">

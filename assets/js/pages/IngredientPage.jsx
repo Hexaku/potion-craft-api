@@ -1,27 +1,19 @@
-import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import IngredientDescription from '../components/Ingredient/IngredientDescription';
 
 
-const IngredientsPage = () => {
+const IngredientPage = () => {
 
-    const [ingredient, setIngredient] = useState([]);
-    const {ingredientId} = useParams();
+    const queryClient = new QueryClient();
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:8000/api/ingredients/${ingredientId}`)
-            .then(response => response.data)
-            .then(data => setIngredient(data))
-            .catch(error => console.log(error.response));
-    }, [])
-    
     return (
         <>
-            <IngredientDescription ingredient={ingredient} />
+            <QueryClientProvider client={queryClient}>
+                <IngredientDescription />
+            </QueryClientProvider>
         </>
     );
 }
  
-export default IngredientsPage;
+export default IngredientPage;

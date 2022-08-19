@@ -21,6 +21,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@tanstack/react-query": "^4.2.1",
         "@tippyjs/react": "^4.2.6",
         "axios": "^0.27.2",
         "prop-types": "^15.8.1",
