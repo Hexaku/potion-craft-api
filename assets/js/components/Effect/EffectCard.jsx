@@ -6,7 +6,6 @@ const EffectCard = ({effect}) => {
     return (
         <div className="w-full md:w-1/3 px-2 pb-12">
             <div className="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
-                <a href="#" className="no-underline hover:no-underline">
                 <div className="flex justify-center">
                     <Image fileName={"effects/" + effect.image} className="h-40 w-auto rounded-t"/>
                 </div>
@@ -16,7 +15,6 @@ const EffectCard = ({effect}) => {
                     {effect.description}
                     </p>
                 </div>
-                </a>
             </div>
         </div>  
     );
