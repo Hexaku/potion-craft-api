@@ -35,7 +35,7 @@ const IngredientDescription = () => {
             <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
                 <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">{data.name}</h2>
                 <div className="mt-8">
-                    <Image fileName={"ingredients/" + data.image} className="h-40 w-auto rounded-full m-auto"/>
+                    <Image fileName={"ingredients/" + data.image} className="h-25 w-auto rounded-full m-auto"/>
                 </div>
                 <div className="bg-white shadow overflow-hidden sm:rounded-lg mt-8">
                     <div className="px-4 py-5 sm:px-6 text-left">
@@ -62,11 +62,11 @@ const IngredientDescription = () => {
                                     {data.potionIngredients.map((potionIngredient, index) => 
                                         <li key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
                                             <div className="w-0 flex-1 flex items-center">
-                                                <Image fileName={"potions/" + potionIngredient.potion.image} className="h-20 w-auto rounded-full"/>
+                                                <Image fileName={"potions/" + potionIngredient.potion.image} className="h-10 w-auto rounded-full"/>
                                                 <span className="font-bold ml-2 flex-1 w-0 truncate">{potionIngredient.potion.name}</span>
                                             </div>
                                             <div className="ml-4 flex-shrink-0">
-                                                Quantity : {potionIngredient.ingredientQuantity}
+                                                ({potionIngredient.ingredientQuantity} needed)
                                             </div>
                                         </li>
                                     )}

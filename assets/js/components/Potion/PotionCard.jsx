@@ -9,7 +9,7 @@ const PotionCard = ({potion}) => {
                 <div className="flex justify-center">
                     <Image fileName={"potions/" + potion.image} className="h-40 w-auto rounded-full"/>
                 </div>
-                <div className="p-6 h-auto md:h-40">
+                <div className="p-6 h-auto">
                     <div className="flex align-items font-bold text-xl text-gray-900 mb-2">{potion.name}</div>
                     <p className="text-gray-800 font-serif text-base mb-5">
                     Une description

@@ -1,10 +1,16 @@
 import React from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import ToolList from '../components/Tool/ToolList';
 
 const ToolsPage = () => {
-    return (
+
+    const queryClient = new QueryClient();
+    
+    return ( 
         <>
-            <ToolList />
+            <QueryClientProvider client={queryClient}>
+                <ToolList />
+            </QueryClientProvider>
         </>
     );
 }
