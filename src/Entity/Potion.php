@@ -30,10 +30,6 @@ class Potion
     #[Groups(['get_effects_collection', 'get_potions_collection', 'get_ingredient_item'])]
     private ?string $name = null;
 
-    #[ORM\Column]
-    #[Groups(['get_potions_collection'])]
-    private ?string $level = null;
-
     #[ORM\OneToMany(mappedBy: 'potion', targetEntity: PotionIngredient::class)]
     #[Groups(['get_potions_collection'])]
     private Collection $potionIngredients;
@@ -50,6 +46,10 @@ class Potion
     #[ORM\Column(length: 255)]
     #[Groups(['get_potions_collection', 'get_ingredient_item'])]
     private ?string $image = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['get_potions_collection'])]
+    private ?string $level = null;
 
     public function __construct()
     {
@@ -70,18 +70,6 @@ class Potion
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getLevel(): ?string
-    {
-        return $this->level;
-    }
-
-    public function setLevel(string $level): self
-    {
-        $this->level = $level;
 
         return $this;
     }
@@ -163,6 +151,18 @@ class Potion
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getLevel(): ?string
+    {
+        return $this->level;
+    }
+
+    public function setLevel(string $level): self
+    {
+        $this->level = $level;
 
         return $this;
     }
