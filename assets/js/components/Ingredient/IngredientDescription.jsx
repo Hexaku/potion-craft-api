@@ -1,7 +1,9 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import Image from '../Image';
+import coinImage from '../../../images/coin.png';
 
 const IngredientDescription = () => {
 
@@ -11,8 +13,6 @@ const IngredientDescription = () => {
         fetch(`http://localhost:8000/api/ingredients/${ingredientId}`)
         .then(res => res.json())
     )
-
-    console.log(ingredientId, data);
 
     if (isLoading) return (
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -44,39 +44,48 @@ const IngredientDescription = () => {
                     <div className="border-t border-gray-200">
                         <dl>
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Type</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{data.ingredientType.name}</dd>
+                                <dt className="text-md font-medium text-gray-500">Type</dt>
+                                <dd className="mt-1 text-md text-gray-900 font-bold sm:mt-0 sm:col-span-2">{data.ingredientType.name}</dd>
                             </div>
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Description</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{data.description}</dd>
+                                <dt className="text-md font-medium text-gray-500">Description</dt>
+                                <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">{data.description}</dd>
                             </div>
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Price</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">{data.price} golds</dd>
+                                <dt className="text-md font-medium text-gray-500">Price</dt>
+                                <dd className="mt-1 text-md font-bold text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <div className='flex items-center justify-center'>
+                                        <img src={coinImage} className="h-5 w-auto mr-2" />
+                                        <span>{data.price} golds</span>
+                                    </div>
+                                </dd>
                             </div>
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Used in</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                                <ul role="list" className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                                <dt className="text-md font-medium text-gray-500">Used in</dt>
+                                <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
                                     {data.potionIngredients.map((potionIngredient, index) => 
-                                        <li key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-sm">
-                                            <div className="w-0 flex-1 flex items-center">
-                                                <Image fileName={"potions/" + potionIngredient.potion.image} className="h-10 w-auto rounded-full"/>
-                                                <span className="font-bold ml-2 flex-1 w-0 truncate">{potionIngredient.potion.name}</span>
+                                        <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
+                                            <Link to={'../../potions/' + potionIngredient.potion.id}>
+                                                    <div className="flex items-center">
+                                                        <Image fileName={"potions/" + potionIngredient.potion.image} className="h-10 w-10 rounded-full mr-2"/>
+                                                        <span className="font-bold ml-2">{potionIngredient.potion.name}</span>
+                                                    </div>
+                                            </Link>
+                                            <div className="text-sm italic">
+                                                    Quantity : {potionIngredient.ingredientQuantity}
                                             </div>
-                                            <div className="ml-4 flex-shrink-0">
-                                                ({potionIngredient.ingredientQuantity} needed)
-                                            </div>
-                                        </li>
-                                    )}
-
-                                </ul>
+                                        </div>
+                                    )}    
                                 </dd>
                             </div>
                         </dl>
                     </div>
                 </div>
+                <Link to={'/ingredients'}>
+                    <button class="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full">
+                        Back to ingredients
+                    </button>
+                </Link>
             </div>
         </div>
     )

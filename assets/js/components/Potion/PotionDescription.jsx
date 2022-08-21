@@ -13,8 +13,6 @@ const PotionDescription = () => {
         .then(res => res.json())
     )
 
-    console.log(potionId, data);
-
     if (isLoading) return (
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
             <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
@@ -48,7 +46,12 @@ const PotionDescription = () => {
                         <dl>
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-md font-medium text-gray-500">Effect</dt>
-                                <dd className="mt-1 text-md font-bold text-gray-900 sm:mt-0 sm:col-span-2">{data.effect.name}</dd>
+                                <dd className="mt-1 text-md font-bold text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <div className='flex items-center justify-center'>
+                                        <span className='mr-2'>{data.effect.name}</span>
+                                        <Image fileName={"effects/" + data.effect.image} className="h-8 w-auto rounded-full"/>                    
+                                    </div>
+                                </dd>
                             </div>
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-md font-medium text-gray-500">Effect Description</dt>
@@ -58,7 +61,9 @@ const PotionDescription = () => {
                                 <dt className="text-md font-medium text-gray-500">Power</dt>
                                 <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
                                     <div className='flex justify-center items-center font-bold'>
+                                        {data.level === "1" && <span className='mr-2'>Weak</span>}
                                         {data.level === "2" && <span className='mr-2'>Medium</span>}
+                                        {data.level === "3" && <span className='mr-2'>Strong</span>}
                                         ({power.map((level, index) => 
                                             <Image keys={index} fileName={"effects/" + data.effect.image} className="h-8 w-auto rounded-full"/>                    
                                         )})
@@ -76,7 +81,7 @@ const PotionDescription = () => {
                                                         <span className="font-bold ml-2">{potionIngredient.ingredient.name}</span>
                                                     </div>
                                                 </Link>
-                                                <div className="text-sm">
+                                                <div className="text-sm italic">
                                                     Quantity : {potionIngredient.ingredientQuantity}
                                                 </div>
                                             </div>
@@ -90,6 +95,11 @@ const PotionDescription = () => {
                         </dl>
                     </div>
                 </div>
+                <Link to={'/potions'}>
+                    <button class="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full">
+                        Back to potions
+                    </button>
+                </Link>
             </div>
         </div>
     )

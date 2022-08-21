@@ -28,7 +28,7 @@ class Potion
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_potions_collection', 'get_potion_item'])]
+    #[Groups(['get_potions_collection', 'get_potion_item', 'get_ingredient_item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
