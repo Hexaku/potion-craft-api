@@ -3,6 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import Image from '../Image';
+import coinImage from '../../../images/coin.png';
 
 const PotionDescription = () => {
 
@@ -29,7 +30,11 @@ const PotionDescription = () => {
         </div>
     )
 
-    let power = [...Array(parseInt(data.level, 10)).keys()];
+    let potionTotalPrice = 0;
+    data.potionIngredients.map(potionIngredient => 
+        potionTotalPrice += potionIngredient.ingredient.price * potionIngredient.ingredientQuantity
+    );
+    
 
     return (
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
@@ -64,7 +69,7 @@ const PotionDescription = () => {
                                         {data.level === "1" && <span className='mr-2'>Weak</span>}
                                         {data.level === "2" && <span className='mr-2'>Medium</span>}
                                         {data.level === "3" && <span className='mr-2'>Strong</span>}
-                                        ({power.map((level, index) => 
+                                        ({[...Array(parseInt(data.level, 10)).keys()].map((level, index) => 
                                             <Image keys={index} fileName={"effects/" + data.effect.image} className="h-8 w-auto rounded-full"/>                    
                                         )})
                                     </div>
@@ -89,8 +94,26 @@ const PotionDescription = () => {
                                 </dd>
                             </div>
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-md font-medium text-gray-500">Price</dt>
-                                <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">X golds</dd>
+                                <dt className="text-md font-medium text-gray-500">Tools needed</dt>
+                                <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
+                                        {data.tools.map((tool, index) => 
+                                            <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
+                                                <div className="flex items-center">
+                                                    <Image fileName={"tools/" + tool.image} className="h-10 w-10 mr-2"/>
+                                                    <span className="font-bold ml-2">{tool.name}</span>
+                                                </div>
+                                            </div>
+                                        )}
+                                </dd>
+                            </div>
+                            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-md font-medium text-gray-500">Total Price</dt>
+                                <dd className="mt-1 text-md font-bold text-gray-900 sm:mt-0 sm:col-span-2">
+                                    <div className='flex items-center justify-center'>
+                                        <img src={coinImage} className="h-5 w-auto mr-2" />
+                                        <span>{potionTotalPrice} golds</span>
+                                    </div>
+                                </dd>
                             </div>
                         </dl>
                     </div>

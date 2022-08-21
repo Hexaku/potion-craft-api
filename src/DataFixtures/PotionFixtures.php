@@ -21,10 +21,14 @@ class PotionFixtures extends Fixture implements DependentFixtureInterface
         // Create 1 potion per effect, with medium level
         foreach(EffectFixtures::EFFECTS as $effect){
                 $slugEffect = $this->slugifier->slugify($effect['name'], '_');
+                $randomLevel = rand(1, 3);
+                $randomTool = rand(1, 3);
                 $newPotion = (new Potion())
-                    ->setLevel(2)
+                    ->setLevel($randomLevel)
                     ->setEffect($this->getReference('effect_' . $slugEffect))
-                    ->addTool($this->getReference('tool_cauldron'))
+                    // Add cauldron tool by default for all recepes
+                    ->addTool($this->getReference('tool_0'))
+                    ->addTool($this->getReference('tool_' . $randomTool))
                     ->setImage('potion_' . $slugEffect . '.jpg');
 
                 $newPotion->setName('Potion of ' . $newPotion->getEffect()->getName());

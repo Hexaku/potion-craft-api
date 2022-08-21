@@ -10,14 +10,14 @@ class ToolFixtures extends Fixture
 {
     public const TOOLS = [
         [
-            'name' => 'Bellows',
-            'description' => 'Heat up the potion, causing the current effect to stick',
-            'image' => 'Bellows.png'
-        ],
-        [
             'name' => 'Cauldron',
             'description' => 'Mix the ingredients to push the potion along its path',
             'image' => 'Cauldron.png'
+        ],
+        [
+            'name' => 'Bellows',
+            'description' => 'Heat up the potion, causing the current effect to stick',
+            'image' => 'Bellows.png'
         ],
         [
             'name' => 'Ladle',
@@ -33,7 +33,7 @@ class ToolFixtures extends Fixture
     
     public function load(ObjectManager $manager): void
     {
-        foreach(self::TOOLS as $tool){
+        foreach(self::TOOLS as $key => $tool){
             $newTool = (new Tool())
                 ->setName($tool['name'])
                 ->setDescription($tool['description'])
@@ -41,7 +41,7 @@ class ToolFixtures extends Fixture
 
             $manager->persist($newTool);
 
-            $this->addReference('tool_' . strtolower($tool['name']), $newTool);
+            $this->addReference('tool_' . $key, $newTool);
         }
 
         $manager->flush();
