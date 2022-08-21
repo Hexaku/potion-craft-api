@@ -7,7 +7,7 @@ const EffectCard = ({effect}) => {
         <div className="w-full md:w-1/3 px-2 pb-12">
             <div className="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
                 <div className="flex justify-center">
-                    <Image fileName={"effects/" + effect.image} className="h-40 w-auto rounded-t"/>
+                    <Image fileName={"effects/" + effect.image} className="h-30 w-auto rounded-t"/>
                 </div>
                 <div className="p-6 h-auto">
                     <div className="font-bold text-xl text-gray-900 mb-2">{effect.name}</div>

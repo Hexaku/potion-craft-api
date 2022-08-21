@@ -8,7 +8,7 @@ const IngredientCard = ({ingredient}) => {
             <div className="h-full bg-white rounded overflow-hidden shadow-md hover:shadow-lg relative smooth">
                 <Link to={'' + ingredient.id}>
                     <div className="flex justify-center">
-                        <Image fileName={"ingredients/" + ingredient.image} className="h-48 w-auto rounded-t"/>
+                        <Image fileName={"ingredients/" + ingredient.image} className="h-40 w-auto rounded-t"/>
                     </div>
                     <div className="p-6 h-auto">
                         <p className="text-gray-600 text-xs md:text-sm">{ingredient.ingredientType.name}</p>

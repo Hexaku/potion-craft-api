@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import IngredientsPage from './pages/IngredientsPage';
 import IngredientPage from './pages/IngredientPage';
+import PotionPage from './pages/PotionPage';
 import PotionsPage from './pages/PotionsPage';
 import EffectsPage from './pages/EffectsPage';
 import ToolsPage from './pages/ToolsPage';
@@ -18,6 +19,7 @@ const App = () => {
         <Routes>
           <Route path='/ingredients/:ingredientId' element={<IngredientPage />} />
           <Route path='/ingredients' element={<IngredientsPage />} />
+          <Route path='/potions/:potionId' element={<PotionPage />} />
           <Route path='/potions' element={<PotionsPage />} />
           <Route path='/effects' element={<EffectsPage />} />
           <Route path='/tools' element={<ToolsPage />} />

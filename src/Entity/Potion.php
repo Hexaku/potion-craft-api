@@ -16,6 +16,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'normalization_context' => ['groups' => ['get_potions_collection']]
         ]
     ],
+    itemOperations: [
+        'get' => [
+            'normalization_context' => ['groups' => ['get_potion_item']]
+        ]
+    ],
     attributes: ["pagination_enabled" => false]
 )]
 class Potion
@@ -23,32 +28,32 @@ class Potion
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_potions_collection'])]
+    #[Groups(['get_potions_collection', 'get_potion_item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_effects_collection', 'get_potions_collection', 'get_ingredient_item'])]
+    #[Groups(['get_effects_collection', 'get_potions_collection', 'get_ingredient_item', 'get_potion_item'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'potion', targetEntity: PotionIngredient::class)]
-    #[Groups(['get_potions_collection'])]
+    #[Groups(['get_potions_collection', 'get_potion_item'])]
     private Collection $potionIngredients;
 
     #[ORM\ManyToOne(inversedBy: 'potions')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['get_potions_collection'])]
+    #[Groups(['get_potions_collection', 'get_potion_item'])]
     private ?Effect $effect = null;
 
     #[ORM\ManyToMany(targetEntity: Tool::class, mappedBy: 'potions')]
-    #[Groups(['get_potions_collection'])]
+    #[Groups(['get_potions_collection', 'get_potion_item'])]
     private Collection $tools;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_potions_collection', 'get_ingredient_item'])]
+    #[Groups(['get_potions_collection', 'get_potion_item', 'get_ingredient_item'])]
     private ?string $image = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_potions_collection'])]
+    #[Groups(['get_potions_collection', 'get_potion_item'])]
     private ?string $level = null;
 
     public function __construct()

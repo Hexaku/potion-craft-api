@@ -29,11 +29,11 @@ class Ingredient
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item', 'get_potion_item'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item', 'get_potion_item'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -41,11 +41,11 @@ class Ingredient
     private ?string $description = null;
 
     #[ORM\Column]
-    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item', 'get_potion_item'])]
     private ?int $price = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_ingredients_collection', 'get_ingredient_item'])]
+    #[Groups(['get_ingredients_collection', 'get_ingredient_item', 'get_potion_item'])]
     private ?string $image = null;
 
     #[ORM\OneToMany(mappedBy: 'ingredient', targetEntity: PotionIngredient::class)]

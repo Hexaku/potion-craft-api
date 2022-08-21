@@ -18,15 +18,16 @@ class PotionIngredient
 
     #[ORM\ManyToOne(inversedBy: 'potionIngredients')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_potion_item'])]
     private ?Ingredient $ingredient = null;
 
     #[ORM\Column]
-    #[Groups('get_ingredient_item')]
+    #[Groups(['get_ingredient_item', 'get_potion_item'])]
     private ?int $ingredientQuantity = null;
 
     #[ORM\ManyToOne(inversedBy: 'potionIngredients')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups('get_ingredient_item')]
+    #[Groups(['get_ingredient_item'])]
     private ?Potion $potion = null;
 
     public function getId(): ?int

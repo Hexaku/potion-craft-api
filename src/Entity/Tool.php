@@ -27,7 +27,7 @@ class Tool
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_tools_collection'])]
+    #[Groups(['get_tools_collection', 'get_potion_item'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -35,7 +35,7 @@ class Tool
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_tools_collection'])]
+    #[Groups(['get_tools_collection', 'get_potion_item'])]
     private ?string $image = null;
 
     #[ORM\ManyToMany(targetEntity: Potion::class, inversedBy: 'tools')]
