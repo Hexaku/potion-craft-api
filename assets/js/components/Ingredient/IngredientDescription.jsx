@@ -77,7 +77,7 @@ const IngredientDescription = () => {
                                                 </div>
                                             </div>
                                         )  
-                                        : <span className='font-bold'>This ingredient is currently not used in any potion !</span> 
+                                        : <span className='italic'>This ingredient is not used in any potion !</span> 
                                     }  
                                 </dd>
                             </div>
