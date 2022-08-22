@@ -62,27 +62,30 @@ const IngredientDescription = () => {
                             </div>
                             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-md font-medium text-gray-500">Used in</dt>
-                                <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
-                                    {data.potionIngredients.map((potionIngredient, index) => 
-                                        <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
-                                            <Link to={'../../potions/' + potionIngredient.potion.id}>
-                                                    <div className="flex items-center">
-                                                        <Image fileName={"potions/" + potionIngredient.potion.image} className="h-10 w-10 rounded-full mr-2"/>
-                                                        <span className="font-bold ml-2">{potionIngredient.potion.name}</span>
-                                                    </div>
-                                            </Link>
-                                            <div className="text-sm italic">
-                                                    Quantity : {potionIngredient.ingredientQuantity}
+                                <dd className="mt-1 text-md text-gray-900  sm:mt-0 sm:col-span-2">
+                                    {data.potionIngredients.length > 0 ? 
+                                        data.potionIngredients.map((potionIngredient, index) => 
+                                            <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
+                                                <Link to={'../../potions/' + potionIngredient.potion.id}>
+                                                        <div className="flex items-center">
+                                                            <Image fileName={"potions/" + potionIngredient.potion.image} className="h-10 w-10 rounded-full mr-2"/>
+                                                            <span className="font-bold ml-2">{potionIngredient.potion.name}</span>
+                                                        </div>
+                                                </Link>
+                                                <div className="text-sm italic">
+                                                        Quantity : {potionIngredient.ingredientQuantity}
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}    
+                                        )  
+                                        : <span className='font-bold'>This ingredient is currently not used in any potion !</span> 
+                                    }  
                                 </dd>
                             </div>
                         </dl>
                     </div>
                 </div>
                 <Link to={'/ingredients'}>
-                    <button class="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full">
+                    <button className="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full">
                         Back to ingredients
                     </button>
                 </Link>

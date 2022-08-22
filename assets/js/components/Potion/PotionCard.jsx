@@ -4,8 +4,8 @@ import Image from '../Image';
 
 const PotionCard = ({potion}) => {
 
-    // Display one icon per key depending level of potion
-    let power = [...Array(parseInt(potion.level, 10)).keys()];
+    // Create an array with one key per power
+    let powerArray = [...Array(parseInt(potion.level, 10)).keys()];
 
     return (
         <div className="w-full md:w-1/3 px-2 pb-12">
@@ -19,8 +19,8 @@ const PotionCard = ({potion}) => {
                 </div>
                 <div className="flex items-center flex-row inset-x-0 bottom-0 p-6">
                     <p className="text-gray-600 font-bold text-xs md:text-sm mr-2">Power : </p>
-                    {power.map((level, index) => 
-                        <Image keys={index} fileName={"effects/" + potion.effect.image} className="h-8 w-auto rounded-full"/>                    
+                    {powerArray.map((level, index) => 
+                        <Image key={index} fileName={"effects/" + potion.effect.image} className="h-8 w-auto rounded-full"/>                    
                     )}
                 </div>
                 </Link>

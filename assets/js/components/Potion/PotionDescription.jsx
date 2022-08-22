@@ -30,9 +30,13 @@ const PotionDescription = () => {
         </div>
     )
 
-    let potionTotalPrice = 0;
+    // Create an array with one key per power
+    let powerArray = [...Array(parseInt(data.level, 10)).keys()];
+
+    // Get total price of the potion (ingredient cost * ingredient quantity)
+    let totalPrice = 0;
     data.potionIngredients.map(potionIngredient => 
-        potionTotalPrice += potionIngredient.ingredient.price * potionIngredient.ingredientQuantity
+        totalPrice += potionIngredient.ingredient.price * potionIngredient.ingredientQuantity
     );
     
 
@@ -69,8 +73,8 @@ const PotionDescription = () => {
                                         {data.level === "1" && <span className='mr-2'>Weak</span>}
                                         {data.level === "2" && <span className='mr-2'>Medium</span>}
                                         {data.level === "3" && <span className='mr-2'>Strong</span>}
-                                        ({[...Array(parseInt(data.level, 10)).keys()].map((level, index) => 
-                                            <Image keys={index} fileName={"effects/" + data.effect.image} className="h-8 w-auto rounded-full"/>                    
+                                        ({powerArray.map((level, index) => 
+                                            <Image key={index} fileName={"effects/" + data.effect.image} className="h-8 w-auto rounded-full"/>                    
                                         )})
                                     </div>
                                 </dd>
@@ -98,10 +102,12 @@ const PotionDescription = () => {
                                 <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
                                         {data.tools.map((tool, index) => 
                                             <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
-                                                <div className="flex items-center">
-                                                    <Image fileName={"tools/" + tool.image} className="h-10 w-10 mr-2"/>
-                                                    <span className="font-bold ml-2">{tool.name}</span>
-                                                </div>
+                                                <Link to={'/tools'}>
+                                                    <div className="flex items-center">
+                                                        <Image fileName={"tools/" + tool.image} className="h-10 w-10 mr-2"/>
+                                                        <span className="font-bold ml-2">{tool.name}</span>
+                                                    </div>
+                                                </Link>
                                             </div>
                                         )}
                                 </dd>
@@ -111,7 +117,7 @@ const PotionDescription = () => {
                                 <dd className="mt-1 text-md font-bold text-gray-900 sm:mt-0 sm:col-span-2">
                                     <div className='flex items-center justify-center'>
                                         <img src={coinImage} className="h-5 w-auto mr-2" />
-                                        <span>{potionTotalPrice} golds</span>
+                                        <span>{totalPrice} golds</span>
                                     </div>
                                 </dd>
                             </div>
@@ -119,7 +125,7 @@ const PotionDescription = () => {
                     </div>
                 </div>
                 <Link to={'/potions'}>
-                    <button class="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full">
+                    <button className="mt-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-full">
                         Back to potions
                     </button>
                 </Link>
