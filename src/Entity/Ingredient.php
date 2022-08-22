@@ -22,7 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'normalization_context' => ['groups' => ['get_ingredient_item']]
         ]
     ],
-
+    order: ['name' => 'ASC']
 )]
 class Ingredient
 {

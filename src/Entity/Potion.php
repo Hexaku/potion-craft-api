@@ -21,7 +21,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
             'normalization_context' => ['groups' => ['get_potion_item']]
         ]
     ],
-    attributes: ["pagination_enabled" => false]
+    attributes: ["pagination_enabled" => false],
+    order: ['name' => 'ASC']
 )]
 class Potion
 {

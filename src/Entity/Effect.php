@@ -16,7 +16,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
         'get' => [
             'normalization_context' => ['groups' => ['get_effects_collection']]
         ]
-    ]
+    ],
+    order: ['name' => 'ASC']
 )]
 class Effect
 {
