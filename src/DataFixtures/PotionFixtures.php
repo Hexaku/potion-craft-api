@@ -24,6 +24,7 @@ class PotionFixtures extends Fixture implements DependentFixtureInterface
                 $randomLevel = rand(1, 3);
                 $randomTool = rand(1, 3);
                 $newPotion = (new Potion())
+                    ->setOwner($this->getReference('user_admin'))
                     ->setLevel($randomLevel)
                     ->setEffect($this->getReference('effect_' . $slugEffect))
                     // Add cauldron tool by default for all recepes
@@ -45,7 +46,8 @@ class PotionFixtures extends Fixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            ToolFixtures::class
+            ToolFixtures::class,
+            UserFixtures::class
         ];
     }
 }
