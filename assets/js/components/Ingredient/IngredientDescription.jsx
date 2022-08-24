@@ -66,7 +66,7 @@ const IngredientDescription = () => {
                                     {data.potionIngredients.length > 0 ? 
                                         data.potionIngredients.map((potionIngredient, index) => 
                                             <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
-                                                <Link to={'../../potions/' + potionIngredient.potion.id}>
+                                                <Link to={'../../potions/' + potionIngredient.potion.id} className="hover:text-gray-600 hover:underline">
                                                         <div className="flex items-center">
                                                             <Image fileName={"potions/" + potionIngredient.potion.image} className="h-10 w-10 rounded-full mr-2"/>
                                                             <span className="font-bold ml-2">{potionIngredient.potion.name}</span>

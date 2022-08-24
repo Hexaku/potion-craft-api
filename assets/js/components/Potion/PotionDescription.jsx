@@ -84,7 +84,7 @@ const PotionDescription = () => {
                                 <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
                                         {data.potionIngredients.map((potionIngredient, index) => 
                                             <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
-                                                <Link to={'../../ingredients/' + potionIngredient.ingredient.id}>
+                                                <Link to={'../../ingredients/' + potionIngredient.ingredient.id} className="hover:text-gray-600 hover:underline">
                                                     <div className="flex items-center">
                                                         <Image fileName={"ingredients/" + potionIngredient.ingredient.image} className="h-10 w-10 rounded-full mr-2"/>
                                                         <span className="font-bold ml-2">{potionIngredient.ingredient.name}</span>
@@ -102,7 +102,7 @@ const PotionDescription = () => {
                                 <dd className="mt-1 text-md text-gray-900 sm:mt-0 sm:col-span-2">
                                         {data.tools.map((tool, index) => 
                                             <div key={index} className="pl-3 pr-4 py-3 flex items-center justify-between text-md">
-                                                <Link to={'/tools'}>
+                                                <Link to={'/tools'} className="hover:text-gray-600 hover:underline">
                                                     <div className="flex items-center">
                                                         <Image fileName={"tools/" + tool.image} className="h-10 w-10 mr-2"/>
                                                         <span className="font-bold ml-2">{tool.name}</span>

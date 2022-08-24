@@ -10,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: IngredientTypeRepository::class)]
-#[ApiResource]
 class IngredientType
 {
     #[ORM\Id]
