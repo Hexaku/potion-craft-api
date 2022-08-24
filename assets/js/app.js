@@ -1,6 +1,5 @@
 import React, {Fragment} from 'react';
 import { createRoot } from 'react-dom/client';
-
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import IngredientsPage from './pages/IngredientsPage';
@@ -9,6 +8,7 @@ import PotionPage from './pages/PotionPage';
 import PotionsPage from './pages/PotionsPage';
 import EffectsPage from './pages/EffectsPage';
 import ToolsPage from './pages/ToolsPage';
+import LoginPage from './pages/LoginPage';
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import '../css/app.css';
 
@@ -23,6 +23,7 @@ const App = () => {
           <Route path='/potions' element={<PotionsPage />} />
           <Route path='/effects' element={<EffectsPage />} />
           <Route path='/tools' element={<ToolsPage />} />
+          <Route path='/login' element={<LoginPage />} />
           <Route path='/' element={<HomePage/>} />
         </Routes>
       </Router>
