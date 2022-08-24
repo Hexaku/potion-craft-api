@@ -57,6 +57,10 @@ class Potion
     #[Groups(['get_potions_collection', 'get_potion_item'])]
     private ?string $level = null;
 
+    #[ORM\ManyToOne(inversedBy: 'potions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $owner = null;
+
     public function __construct()
     {
         $this->potionIngredients = new ArrayCollection();
@@ -169,6 +173,18 @@ class Potion
     public function setLevel(string $level): self
     {
         $this->level = $level;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+
+    public function setOwner(?User $owner): self
+    {
+        $this->owner = $owner;
 
         return $this;
     }
