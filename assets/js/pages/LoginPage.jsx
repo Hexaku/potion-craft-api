@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import AuthAPI from '../services/authAPI';
 
-const LoginPage = () => {
+const LoginPage = ({onLogin}) => {
 
     const [credentials, setCredentials] = useState({
         username: "",
@@ -21,6 +21,7 @@ const LoginPage = () => {
         try {
             await AuthAPI.authenticate(credentials);
             setError('');
+            onLogin(true);
         } catch(error) {
             setError(error.response.data.message);
         }

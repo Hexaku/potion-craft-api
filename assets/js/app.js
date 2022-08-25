@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React, {Fragment, useState} from 'react';
 import { createRoot } from 'react-dom/client';
 import AuthAPI from './services/authAPI';
 import Navbar from './components/Navbar';
@@ -16,9 +16,12 @@ import '../css/app.css';
 AuthAPI.setup();
 
 const App = () => {
+
+    const [isAuthenticated, setIsAuthenticated] = useState(AuthAPI.isAuthenticated());
+
     return (
       <Router>
-        <Navbar/>
+        <Navbar isAuthenticated={isAuthenticated} onLogout={setIsAuthenticated} />
         <Routes>
           <Route path='/ingredients/:ingredientId' element={<IngredientPage />} />
           <Route path='/ingredients' element={<IngredientsPage />} />
@@ -26,7 +29,7 @@ const App = () => {
           <Route path='/potions' element={<PotionsPage />} />
           <Route path='/effects' element={<EffectsPage />} />
           <Route path='/tools' element={<ToolsPage />} />
-          <Route path='/login' element={<LoginPage />} />
+          <Route path='/login' element={<LoginPage onLogin={setIsAuthenticated} />} />
           <Route path='/' element={<HomePage/>} />
         </Routes>
       </Router>

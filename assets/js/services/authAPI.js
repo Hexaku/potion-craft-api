@@ -25,17 +25,27 @@ function setAxiosToken(token){
 
 function setup(){
     const token = window.localStorage.getItem("authToken");
+    if (isAuthenticated()){
+        setAxiosToken(token);
+        console.log("Connecté à l'application");
+    }
+}
+
+function isAuthenticated(){
+    const token = window.localStorage.getItem("authToken");
     if(token){
         const jwtData = jwtDecode(token);
         if(jwtData.exp * 1000 > new Date().getTime()){
-            setAxiosToken(token);
-            console.log("Connecté à l'application");
-        } 
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
 export default {
     authenticate,
     logout,
-    setup
+    setup,
+    isAuthenticated
 }
