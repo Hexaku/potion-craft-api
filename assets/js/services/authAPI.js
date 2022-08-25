@@ -1,4 +1,5 @@
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 function logout(){
     window.localStorage.removeItem('authToken');
@@ -12,13 +13,29 @@ function authenticate(credentials){
             // Stock token in local storage
             window.localStorage.setItem("authToken", token);
             // Authorization header HTTP
-            axios.defaults.headers['Authorization'] = "Bearer " + token;
+            setAxiosToken(token);
 
             return true;
         })
 }
 
+function setAxiosToken(token){
+    return axios.defaults.headers['Authorization'] = "Bearer " + token;
+}
+
+function setup(){
+    const token = window.localStorage.getItem("authToken");
+    if(token){
+        const jwtData = jwtDecode(token);
+        if(jwtData.exp * 1000 > new Date().getTime()){
+            setAxiosToken(token);
+            console.log("Connecté à l'application");
+        } 
+    }
+}
+
 export default {
     authenticate,
-    logout
+    logout,
+    setup
 }

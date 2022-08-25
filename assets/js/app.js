@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import { createRoot } from 'react-dom/client';
+import AuthAPI from './services/authAPI';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import IngredientsPage from './pages/IngredientsPage';
@@ -11,6 +12,8 @@ import ToolsPage from './pages/ToolsPage';
 import LoginPage from './pages/LoginPage';
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import '../css/app.css';
+
+AuthAPI.setup();
 
 const App = () => {
     return (
