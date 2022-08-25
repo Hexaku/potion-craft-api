@@ -1,16 +1,29 @@
 import React, { useState } from 'react';
+import AuthAPI from '../services/authAPI';
 
 const LoginPage = () => {
 
     const [credentials, setCredentials] = useState({
-        username: "user",
-        password: "pass"
+        username: "",
+        password: ""
     })
 
-    const handleChange = event => {
-        const value = event.currentTarget.value;
-        const name = event.currentTarget.name;
+    const [error, setError] = useState('');
+
+    // Input change
+    const handleChange = ({currentTarget}) => {
+        const {value, name} = currentTarget;
         setCredentials({...credentials, [name]: value})
+    }
+
+    const handleSubmit = async event => {
+        event.preventDefault();
+        try {
+            await AuthAPI.authenticate(credentials);
+            setError('');
+        } catch(error) {
+            setError(error.response.data.message);
+        }
     }
 
     return (
@@ -22,12 +35,13 @@ const LoginPage = () => {
         </div>
 
         <div className="flex justify-center">
-            <form action="" method="post" className="w-full max-w-lg">
+            <form onSubmit={handleSubmit} className="w-full max-w-lg">
+                {error &&
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3 mb-6 md:mb-0">
-                        <p className="text-red-600 font-bold">Error message</p>
+                        <p className="text-red-600 font-bold">{error}</p>
                     </div>
-                </div>
+                </div>}
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3 mb-6 md:mb-0">
                         <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="username">Email:</label>
