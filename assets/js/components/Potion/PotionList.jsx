@@ -4,6 +4,7 @@ import PotionCard from './PotionCard';
 import Pagination from '../Pagination';
 
 const PotionList = () => {
+    console.log(AuthAPI.isAuthenticated());
 
     const [currentPage, setCurrentPage] = useState(1);
     const [search, setSearch] = useState('');

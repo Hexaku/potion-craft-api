@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[ApiResource()]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -32,6 +34,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Potion::class, orphanRemoval: true)]
     private Collection $potions;
+
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
 
     public function __construct()
     {
@@ -134,6 +139,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $potion->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }

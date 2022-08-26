@@ -10,6 +10,7 @@ import PotionsPage from './pages/PotionsPage';
 import EffectsPage from './pages/EffectsPage';
 import ToolsPage from './pages/ToolsPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import '../css/app.css';
 
@@ -30,6 +31,7 @@ const App = () => {
           <Route path='/effects' element={<EffectsPage />} />
           <Route path='/tools' element={<ToolsPage />} />
           <Route path='/login' element={<LoginPage onLogin={setIsAuthenticated} />} />
+          <Route path='/register' element={<RegisterPage />} />
           <Route path='/' element={<HomePage/>} />
         </Routes>
       </Router>
