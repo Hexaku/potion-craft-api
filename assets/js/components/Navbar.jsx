@@ -2,15 +2,17 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import potionImage from '../../images/potion.png';
 import AuthAPI from '../services/authAPI';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({isAuthenticated, onLogout}) => {
+
+    const navigate = useNavigate();
 
     const handleLogout = () => {
         AuthAPI.logout();
         onLogout(false);
+        navigate("/login");
     }
-
-    console.log(isAuthenticated);
 
     return ( 
         <header className="dark">

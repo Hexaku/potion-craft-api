@@ -27,7 +27,6 @@ function setup(){
     const token = window.localStorage.getItem("authToken");
     if (isAuthenticated()){
         setAxiosToken(token);
-        console.log("Connecté à l'application");
     }
 }
 

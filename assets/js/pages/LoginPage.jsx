@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AuthAPI from '../services/authAPI';
 
 const LoginPage = ({onLogin}) => {
@@ -7,8 +8,8 @@ const LoginPage = ({onLogin}) => {
         username: "",
         password: ""
     })
-
     const [error, setError] = useState('');
+    const navigate = useNavigate();
 
     // Input change
     const handleChange = ({currentTarget}) => {
@@ -22,6 +23,7 @@ const LoginPage = ({onLogin}) => {
             await AuthAPI.authenticate(credentials);
             setError('');
             onLogin(true);
+            navigate("/");
         } catch(error) {
             setError(error.response.data.message);
         }
@@ -29,6 +31,7 @@ const LoginPage = ({onLogin}) => {
 
     return (
     <>
+
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:pt-16 lg:pb-8 lg:px-6">
             <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
                 <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Welcome back alchemist.</h2>
