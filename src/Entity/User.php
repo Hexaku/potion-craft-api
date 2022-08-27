@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity('email', 'A user with this email adresse already exist')]
+#[UniqueEntity('email', 'A user with this email adress already exist')]
 #[ApiResource()]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

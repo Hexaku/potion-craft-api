@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
 
@@ -8,6 +9,14 @@ const RegisterPage = () => {
         email: "",
         password: ""
     })
+
+    const [errors, setErrors] = useState({
+        username: "",
+        email: "",
+        password: ""
+    })
+
+    const navigate = useNavigate();
 
     // Input change
     const handleChange = ({currentTarget}) => {
@@ -19,27 +28,36 @@ const RegisterPage = () => {
         event.preventDefault();
         try {
             const response = await axios.post("http://localhost:8000/api/users", user);
-            console.log(response);
+            setErrors({});
+            navigate('/login');
         } catch(error) {
-            console.log(error.response);
+            const {violations} = error.response.data;
+
+            if(violations){
+                const apiErrors = {};
+                violations.forEach(violation => {
+                    apiErrors[violation.propertyPath]  = violation.message
+                });
+                setErrors(apiErrors);
+            }
         }
-        console.log("submit!");
     }
 
     return ( 
     <>
-        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:pt-16 lg:pb-8 lg:px-6">
+        <div className="py-8 px-4 mx-auto max-w-screen-xl lg:pt-16 lg:pb-4 lg:px-6">
             <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-                <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Wanna be an alchemist ?</h2>
+                <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">So you want to become an alchemist ?</h2>
             </div>
         </div>
-
         <div className="flex justify-center">
             <form onSubmit={handleSubmit} className="w-full max-w-lg">
-                {true &&
+                {errors &&
                 <div className="flex flex-wrap -mx-3 mb-6">
                     <div className="w-full px-3 mb-6 md:mb-0">
-                        <p className="text-red-600 font-bold">Error ?</p>
+                        <p className="text-red-600 font-bold">{errors.username}</p>
+                        <p className="text-red-600 font-bold">{errors.email}</p>
+                        <p className="text-red-600 font-bold">{errors.password}</p>
                     </div>
                 </div>}
                 <div className="flex flex-wrap -mx-3 mb-6">

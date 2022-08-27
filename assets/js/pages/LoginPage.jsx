@@ -34,7 +34,7 @@ const LoginPage = ({onLogin}) => {
 
         <div className="py-8 px-4 mx-auto max-w-screen-xl lg:pt-16 lg:pb-8 lg:px-6">
             <div className="mx-auto max-w-screen-md text-center mb-8 lg:mb-12">
-                <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Welcome back alchemist.</h2>
+                <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-gray-900 dark:text-white">Nice to see you again.</h2>
             </div>
         </div>
 

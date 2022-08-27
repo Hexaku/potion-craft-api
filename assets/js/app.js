@@ -32,7 +32,7 @@ const App = () => {
           <Route path='/tools' element={<ToolsPage />} />
           <Route path='/login' element={<LoginPage onLogin={setIsAuthenticated} />} />
           <Route path='/register' element={<RegisterPage />} />
-          <Route path='/' element={<HomePage/>} />
+          <Route path='/' element={<HomePage isAuthenticated={isAuthenticated} />} />
         </Routes>
       </Router>
     )

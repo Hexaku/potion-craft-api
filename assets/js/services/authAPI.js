@@ -23,15 +23,19 @@ function setAxiosToken(token){
     return axios.defaults.headers['Authorization'] = "Bearer " + token;
 }
 
+function getToken(){
+    return window.localStorage.getItem("authToken");
+}
+
 function setup(){
-    const token = window.localStorage.getItem("authToken");
+    const token = getToken();
     if (isAuthenticated()){
         setAxiosToken(token);
     }
 }
 
 function isAuthenticated(){
-    const token = window.localStorage.getItem("authToken");
+    const token = getToken();
     if(token){
         const jwtData = jwtDecode(token);
         if(jwtData.exp * 1000 > new Date().getTime()){
@@ -42,9 +46,20 @@ function isAuthenticated(){
     }
 }
 
+function getUsername(){
+    const token = getToken();
+    const jwtData = jwtDecode(token);
+    if(token && jwtData){
+        return jwtData.username;
+    } else {
+        return false;
+    }
+}
+
 export default {
     authenticate,
     logout,
     setup,
-    isAuthenticated
+    isAuthenticated,
+    getUsername
 }
