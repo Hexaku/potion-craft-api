@@ -59,6 +59,7 @@ class Potion
 
     #[ORM\ManyToOne(inversedBy: 'potions')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_potions_collection', 'get_potion_item'])]
     private ?User $owner = null;
 
     public function __construct()

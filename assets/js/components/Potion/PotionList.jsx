@@ -63,6 +63,11 @@ const PotionList = () => {
                         <input type="text" onChange={handleChange} value={search} id="default-search" className="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search potion name..." required/>
                     </div>
                 </div>
+                {paginatedPotions.length == 0 &&
+                    <div className='flex justify-center'>
+                        <p className="mb-5 font-light text-gray-500 text-2xl dark:text-gray-400">You don't have any potions yet !</p>
+                    </div>
+                }
                 <div className="container w-full max-w-6xl mx-auto px-2 py-8">
                     <div className="flex flex-wrap -mx-2">
                         {paginatedPotions.map((potion, index) => 
